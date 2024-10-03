@@ -23,7 +23,7 @@ namespace TcpServer
             while (true)
             {
                 TcpClient socket = server.AcceptTcpClient();
-                Console.WriteLine("Client connected.");
+                Console.WriteLine("client connected.");
 
                 Task.Run(() => { DoClient(socket); });
                 
