@@ -18,15 +18,15 @@ namespace TcpServer
 
             TcpListener Server = new TcpListener(Port);
             Server.Start();
-
-            Console.WriteLine("Ready and running pls enter the follow: 'method', 'random', 'num1', 'num2'");
+                
+            Console.WriteLine("op and running");
 
 
             while (true)
             {
                 // Accept client connection
                 TcpClient socket = Server.AcceptTcpClient();
-                Console.WriteLine("Connected!");
+                Console.WriteLine("Connected! Ready and running pls enter the follow: 'method', 'random', 'num1', 'num2'");
                 Task.Run(() => { DoClient(socket); });
             }
 
@@ -44,7 +44,7 @@ namespace TcpServer
                 // Deserialize the JSON into a simple object
                 JsonObj obj = JsonSerializer.Deserialize<JsonObj>(jsonString);
 
-                // Simple addition or subtraction based on the method
+                // plsu og minus
                 if (obj.Method == "ADD")
                 {
                     obj.result = obj.Num1 + obj.Num2;

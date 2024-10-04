@@ -16,8 +16,6 @@ namespace TcpServer
 
         public string Method { get; set; }
 
-        public string Random { get; set; }
-
         public double Num1 { get; set; }
 
         public double Num2 { get; set; }
