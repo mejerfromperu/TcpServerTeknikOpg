@@ -57,9 +57,9 @@ namespace TcpServer
 
 
                 string response = JsonSerializer.Serialize(new { result = obj.result });
+                Console.WriteLine($"Sending: {response}");
                 sw.WriteLine(response);
 
-                
             }
             catch (Exception ex)
             {
