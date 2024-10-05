@@ -4,8 +4,8 @@ using TcpServer;
 Console.WriteLine("Hello, World!");
 
 
-//Server server = new Server();
-//server.Start();
+Server server = new Server();
+server.Start();
 
-ServerJson server2 = new ServerJson();
-server2.Start();
+//ServerJson server2 = new ServerJson();
+//server2.Start();

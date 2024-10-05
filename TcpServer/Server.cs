@@ -37,7 +37,7 @@ namespace TcpServer
             StreamWriter sw = new StreamWriter(socket.GetStream()) { AutoFlush = true};
             try
             {
-                string method = sr.ReadLine();
+                string method = sr.ReadLine().ToUpper();
                 Console.WriteLine($"recived command {method}");
                 // step 2
                 if (method == "ADD")
@@ -63,12 +63,12 @@ namespace TcpServer
                     sw.WriteLine("invalid input, has to be 2 numbers seperated with space");
                     return;
                 }
-                int result = numbers == "ADD" ? num1 + num2 : num1 - num2;
+                int result = method == "ADD" ? num1 + num2 : num1 - num2;
                 sw.WriteLine($"result: {result}");
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine($"error 404: {ex.Message}");
+                Console.WriteLine($"error 404: {e.Message}");
             }
             finally
             {

@@ -26,7 +26,7 @@ namespace TcpServer
             {
                 // Accept client connection
                 TcpClient socket = Server.AcceptTcpClient();
-                Console.WriteLine("Connected! Ready and running pls enter the follow: 'method', 'random', 'num1', 'num2'");
+                Console.WriteLine("Connected! Ready and running pls enter the following: 'method', 'num1', 'num2'");
                 Task.Run(() => { DoClient(socket); });
             }
 
@@ -36,13 +36,13 @@ namespace TcpServer
         {
             StreamReader sr = new StreamReader(socket.GetStream());
             StreamWriter sw = new StreamWriter(socket.GetStream()) { AutoFlush = true };
-
             try
             {
                 string jsonString = sr.ReadLine();
 
                 // Deserialize the JSON into a simple object
                 JsonObj obj = JsonSerializer.Deserialize<JsonObj>(jsonString);
+                Console.WriteLine($"received data: {jsonString}");
 
                 // plsu og minus
                 if (obj.Method == "ADD")
@@ -56,26 +56,20 @@ namespace TcpServer
 
 
 
-                string response = JsonSerializer.Serialize(new { result = obj.result });
-                Console.WriteLine($"Sending: {response}");
+                string response = JsonSerializer.Serialize(obj);
+                Console.WriteLine($"response being sent: {response}");
                 sw.WriteLine(response);
 
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw new ArgumentException($"sorry invalid input: {ex}");
+                throw new ArgumentException($"sorry invalid input: {e}");
             }
             finally { socket.Close(); }
 
             
         }
 
-        private void SendResponse(StreamWriter sw, string status, double result)
-        {
-            var response = new { status = status, result = result };
-            string jsonResponse = JsonSerializer.Serialize(response);
-            sw.WriteLine(jsonResponse);
-        }
 
 
     }
